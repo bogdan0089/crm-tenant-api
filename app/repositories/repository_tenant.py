@@ -37,4 +37,4 @@ class RepositoryTenant:
         return tenant
     
     async def delete_tenant(self, tenant: Tenant):
-        await self.session.delete(tenant)
+        self.session.delete(tenant)

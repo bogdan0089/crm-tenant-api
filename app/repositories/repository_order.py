@@ -45,7 +45,7 @@ class RepositoryOrder:
         return order
     
     async def delete_order(self, order: Order):
-        await self.session.delete(order)
+        self.session.delete(order)
         
 
 
