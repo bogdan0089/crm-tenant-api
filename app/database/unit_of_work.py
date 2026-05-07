@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from database.session import session_maker
-
+from app.database.session import session_maker
+from app.repositories.repository_order import RepositoryOrder
+from app.repositories.repository_tenant import RepositoryTenant
 
 class UnitOfWork:
     def __init__(self) -> None:
@@ -9,6 +10,8 @@ class UnitOfWork:
 
     async def __aenter__(self):
         self.session = self.session_factory()
+        self.order = RepositoryOrder(self.session)
+        self.tenant = RepositoryTenant(self.session)
         return self
 
     async def __aexit__(self, exc_type, exc, tb) -> None:
