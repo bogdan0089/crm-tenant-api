@@ -11,5 +11,5 @@ class Tenant(Base):
     name: Mapped[str]
     email: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
-    orders: Mapped[List["Order"]] = relationship(back_populates="tenant")
+    orders: Mapped[List["Order"]] = relationship(back_populates="tenant", cascade="all, delete-orphan")
     

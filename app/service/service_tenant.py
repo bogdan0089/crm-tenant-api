@@ -1,7 +1,7 @@
 from app.database.unit_of_work import UnitOfWork
 from app.schemas.schemas_tenant import CreateTenant, UpdateTenant
 from app.models.model_tenant import Tenant
-from app.core.exceptions import TenantNotFound, TenantsNotFound
+from app.core.exceptions import TenantNotFound
 
 
 class ServiceTenant:
@@ -23,11 +23,8 @@ class ServiceTenant:
     @staticmethod
     async def get_tenants(limit: int, offset: int) -> list[Tenant]:
         async with UnitOfWork() as uow:
-            tenants = await uow.tenant.get_tenants(limit, offset)
-            if not tenants:
-                raise TenantsNotFound()
-            return tenants
-        
+            return await uow.tenant.get_tenants(limit, offset)
+
     @staticmethod
     async def update_tenant(tenant_id: int, data: UpdateTenant) -> Tenant:
         async with UnitOfWork() as uow:

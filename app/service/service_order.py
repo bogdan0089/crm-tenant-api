@@ -2,7 +2,7 @@ from app.database.unit_of_work import UnitOfWork
 from app.core.enums import OrderStatus
 from app.schemas.schemas_order import CreateOrder, UpdateOrder
 from app.models.model_order import Order
-from app.core.exceptions import OrderNotFound, OrdersNotFound
+from app.core.exceptions import OrderNotFound
 
 
 class ServiceOrder:
@@ -24,10 +24,7 @@ class ServiceOrder:
     @staticmethod
     async def get_orders(limit: int, offset: int) -> list[Order]:
         async with UnitOfWork() as uow:
-            orders = await uow.order.get_orders(limit, offset)
-            if not orders:
-                raise OrdersNotFound()
-            return orders
+            return await uow.order.get_orders(limit, offset)
         
     @staticmethod
     async def update_order(order_id: int, data: UpdateOrder) -> Order:
