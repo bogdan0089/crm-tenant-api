@@ -28,7 +28,7 @@ class RepositoryTenant:
         )
         return tenants.scalars().all()
     
-    async def tenant_update(self, tenant: Tenant, data: UpdateTenant) -> Tenant:
+    async def update_tenant(self, tenant: Tenant, data: UpdateTenant) -> Tenant:
         for field, value in data.model_dump(exclude_unset=True).items():
             setattr(tenant, field, value)
         self.session.add(tenant)

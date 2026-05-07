@@ -29,7 +29,7 @@ class RepositoryOrder:
         )
         return orders.scalars().all()
     
-    async def orders_update(self, order: Order, data: UpdateOrder) -> Order:
+    async def update_order(self, order: Order, data: UpdateOrder) -> Order:
         for field, value in data.model_dump(exclude_unset=True).items():
             setattr(order, field, value)
         self.session.add(order)
@@ -44,7 +44,7 @@ class RepositoryOrder:
         await self.session.refresh(order)
         return order
     
-    async def order_delete(self, order: Order):
+    async def delete_order(self, order: Order):
         await self.session.delete(order)
         
 
