@@ -23,5 +23,5 @@ async def update_tenant(tenant_id: int, data: UpdateTenant) -> ResponseTenant:
     return await ServiceTenant.update_tenant(tenant_id, data)
 
 @router_tenant.delete("/{tenant_id}", status_code=204)
-async def delete_tenant(tenant_id: int):
-    return await ServiceTenant.delete_tenant(tenant_id)
+async def delete_tenant(tenant_id: int) -> None:
+    await ServiceTenant.delete_tenant(tenant_id)

@@ -5,7 +5,7 @@ from datetime import datetime
 class CreateOrder(BaseModel):
     title: str
     amount: float
-    status: OrderStatus
+    status: OrderStatus = OrderStatus.NEW
     tenant_id: int
 
 class ResponseOrder(BaseModel):

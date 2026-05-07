@@ -27,5 +27,5 @@ async def update_order_status(order_id: int, data: UpdateOrderStatus) -> Respons
     return await ServiceOrder.update_order_status(order_id, data.status)
 
 @router_order.delete("/{order_id}", status_code=204)
-async def delete_order(order_id: int):
-    return await ServiceOrder.delete_order(order_id)
+async def delete_order(order_id: int) -> None:
+    await ServiceOrder.delete_order(order_id)
