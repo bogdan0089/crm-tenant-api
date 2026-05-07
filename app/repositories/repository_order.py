@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.schemas_order import CreateOrder, ResponseOrder, UpdateOrder
+from app.schemas.schemas_order import CreateOrder, UpdateOrder
 from app.models.model_order import Order
 from sqlalchemy import select
 from app.core.enums import OrderStatus
@@ -45,7 +45,7 @@ class RepositoryOrder:
         return order
     
     async def delete_order(self, order: Order):
-        self.session.delete(order)
+        await self.session.delete(order)
         
 
 
