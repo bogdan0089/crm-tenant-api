@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
-
+from datetime import datetime
 
 class CreateTenant(BaseModel):
     name: str
@@ -11,6 +11,7 @@ class ResponseTenant(BaseModel):
     id: int
     name: str
     email: EmailStr
+    created_at: datetime
 
 class UpdateTenant(BaseModel):
     name: str | None = None
